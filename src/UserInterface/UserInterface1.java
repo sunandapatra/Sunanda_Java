@@ -1,6 +1,6 @@
 package UserInterface;
 
-import java.awt.Button;
+import javafx.scene.control.Button;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,7 +17,7 @@ public class UserInterface1 extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		Button btn = new Button("Click Me");
 		StackPane root = new StackPane();
-		//root.getChildren().add(btn);
+		root.getChildren().add(btn);
 		Scene scene = new Scene(root, 500, 300);
 		primaryStage.setScene(scene);
 		primaryStage.show();
