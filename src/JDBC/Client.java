@@ -1,8 +1,6 @@
 package JDBC;
 
 import java.util.List;
-
-import Domain.Employee;
 import JDBC.dao.CustomerDAO;
 import JDBC.dao.CustomerDAOImplementation;
 import JDBC.domain.Customer;
