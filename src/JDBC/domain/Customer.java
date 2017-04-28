@@ -16,6 +16,10 @@ public class Customer {
 		this.address = address;
 		this.phone = phone;
 	}
+	
+	public Customer(){
+		
+	}
 
 	public int getCustomerId() {
 		return customerId;
