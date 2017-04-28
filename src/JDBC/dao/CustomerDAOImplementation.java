@@ -22,7 +22,8 @@ public class CustomerDAOImplementation implements CustomerDAO {
 
 	public List<Customer> getCustomers() {
 		List<Customer> customer = new ArrayList<Customer>();
-		Customer cust = new Customer(1, "Sunanda", "Patra", "USA", 45);
+		//Customer cust = new Customer(1, "Sunanda", "Patra", "USA", 45);
+		Customer cust = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, username, password);
@@ -39,8 +40,8 @@ public class CustomerDAOImplementation implements CustomerDAO {
 
 			psmt = con.prepareStatement("select * from customer");
 			rs = psmt.executeQuery();
-			System.out.println("111");
 			while (rs.next()) {
+				cust = new Customer();
 				cust.setCustomerId(rs.getInt("Customer_Id"));
 				cust.setFirstName(rs.getString(2));
 				cust.setLastName(rs.getString("Customer_Lname"));
@@ -62,7 +63,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
 				}
 			}
 		}
-
+		
 		return customer;
 	}
 
