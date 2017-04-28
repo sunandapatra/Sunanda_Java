@@ -13,10 +13,10 @@ public class CustomerServiceImplementation implements CustomerService {
 		CustomerDAO custDao = new CustomerDAOImplementation();
 		List<Customer> customers = custDao.getCustomers();
 		for (Customer cust : customers) {
-			//if (emp.getSalary() < 3000) {
-			//	emp.setSalary(emp.getSalary() + 100);
+			if(cust.getAddress().equals("USA")){
+				cust.setAddress("INDIA");
 			}
-		//}
+		}
 		return customers;
 	}
 
