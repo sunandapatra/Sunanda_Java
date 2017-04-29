@@ -1,22 +1,26 @@
 package JDBC;
 
 import java.util.List;
-import JDBC.dao.CustomerDAO;
-import JDBC.dao.CustomerDAOImplementation;
+
+import Domain.Employee;
+import JDBC.dao.ICustomerDAO;
+import JDBC.dao.Impl.CustomerDAOImpl;
 import JDBC.domain.Customer;
-import JDBC.service.CustomerService;
-import JDBC.service.CustomerServiceImplementation;
+import JDBC.service.ICustomerService;
+import JDBC.service.Impl.CustomerServiceImpl;
 
 public class Client {
 
 	public static void main(String[] args) {
 
-		CustomerDAO prog = new CustomerDAOImplementation();
+		ICustomerDAO prog = new CustomerDAOImpl();
 		List<Customer> customers = prog.getCustomers();
-		System.out.println("Customers: " + customers);
+		
+		ICustomerService service = new CustomerServiceImpl();
+		List<Customer> customers1 = service.getCustomers();
 
-		for (Customer cust : customers) {
-			System.out.println(cust.getFirstName());
+		for (Customer cust : customers1) {
+			System.out.println(cust.toString());
 		}
 	}
 
