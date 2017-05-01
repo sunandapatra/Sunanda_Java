@@ -17,6 +17,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
 	String url = "jdbc:mysql://localhost:3306/sunandapatra";
 	String username = "sunandapatra";
 	String password = "sonusona14";
+	String firstName = "Sunanda";
 	Connection con = null;
 	Statement stmt = null;
 	ResultSet rs = null;
@@ -24,8 +25,8 @@ public class CustomerDAOImpl implements ICustomerDAO {
 
 	public List<Customer> getCustomers() {
 		List<Customer> customer = new ArrayList<Customer>();
-		//Customer cust = new Customer(1, "Sunanda", "Patra", "USA", 45);
-		Customer cust = null;
+		Customer cust = new Customer(1, "Sunanda", "Patra", "USA", 45);
+		//Customer cust = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, username, password);
@@ -40,7 +41,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
 			 * "");
 			 */
 
-			psmt = con.prepareStatement("select * from customer");
+			psmt = con.prepareStatement("select * from customer where Customer_Fname= '"+firstName+"' ");
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				cust = new Customer();

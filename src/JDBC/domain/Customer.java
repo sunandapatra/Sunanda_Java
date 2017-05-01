@@ -1,24 +1,37 @@
 package JDBC.domain;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Customer {
 
 	private int customerId;
-	private String firstName;
-	private String lastName;
-	private String address;
+	// private String firstName;
+	// private String lastName;
+	// private String address;
 	private int phone;
+
+	private final SimpleStringProperty firstName = new SimpleStringProperty("");
+	private final SimpleStringProperty lastName = new SimpleStringProperty("");
+	private final SimpleStringProperty address = new SimpleStringProperty("");
+
 
 	public Customer(int customerId, String firstName, String lastName, String address, int phone) {
 		super();
 		this.customerId = customerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
+		setFirstName(firstName);
+		setLastName(lastName);
+		setAddress(address);
 		this.phone = phone;
 	}
-	
-	public Customer(){
-		
+
+	public Customer(String firstName, String lastName, String address) {
+		setFirstName(firstName);
+		setLastName(lastName);
+		setAddress(address);
+	}
+
+	public Customer() {
+
 	}
 
 	public int getCustomerId() {
@@ -30,29 +43,29 @@ public class Customer {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return firstName.get();
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstName(String fName) {
+		firstName.set(fName);
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastName.get();
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastName(String LName) {
+		lastName.set(LName);
 	}
 
 	public String getAddress() {
-		return address;
+		return address.get();
 	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	
+	public void setAddress(String add) {
+		address.set(add);
 	}
-
+	
 	public int getPhone() {
 		return phone;
 	}

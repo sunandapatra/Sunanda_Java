@@ -1,6 +1,11 @@
 package JDBC;
 
+import java.util.List;
+
 import Domain.PersonDO;
+import JDBC.dao.ICustomerDAO;
+import JDBC.dao.Impl.CustomerDAOImpl;
+import JDBC.domain.Customer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +30,7 @@ import javafx.stage.Stage;
 public class EmployeeTableView extends Application{
 	
 	
-	private final static ObservableList<PersonDO> data = FXCollections.observableArrayList();
+	private final static ObservableList<Customer> data = FXCollections.observableArrayList();
 	
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -33,8 +38,8 @@ public class EmployeeTableView extends Application{
 
 	@Override
     public void start(Stage stage) {
-        TableView<PersonDO> table = new TableView<PersonDO>();
-        final ObservableList<PersonDO> data =
+        TableView<Customer> table = new TableView<Customer>();
+        final ObservableList<Customer> data =
                 FXCollections.observableArrayList();
 
         final HBox hb = new HBox();
@@ -76,16 +81,17 @@ public class EmployeeTableView extends Application{
         final TextField addFirstName = new TextField();
         addFirstName.setPromptText("First Name");
         addFirstName.setMaxWidth(firstNameCol.getPrefWidth());
+        addFirstName.
         
         final TextField addLastName = new TextField();
-        addLastName.setMaxWidth(lastNameCol.getPrefWidth());
-        
         addLastName.setPromptText("Last Name");
-        final TextField addEmail = new TextField();
-        addEmail.setMaxWidth(emailCol.getPrefWidth());
-        addEmail.setPromptText("Email");
+        addLastName.setMaxWidth(lastNameCol.getPrefWidth());
+       
+        final TextField addAddress = new TextField();
+        addAddress.setMaxWidth(emailCol.getPrefWidth());
+        addAddress.setPromptText("Address");
 
-        final Button addButton = new Button("Add");
+       /* final Button addButton = new Button("Add");
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -94,17 +100,35 @@ public class EmployeeTableView extends Application{
                 data.add(new PersonDO(
                         addFirstName.getText(),
                         addLastName.getText(),
-                        addEmail.getText()));
+                        addAddress.getText()));
+                
+                addFirstName.clear();
+            }
+        });*/
+        
+        final Button searchButton = new Button("Search");
+        searchButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+            	ICustomerDAO prog = new CustomerDAOImpl();
+        		List<Customer> customers = prog.getCustomers();
+        		System.out.println("AAAAA : "+customers);
+            		// List<PersonDO> personDOList = dao.getPerson();
+            	// for loop data.add(personDO)
+                data.add(new Customer(
+                        addFirstName.getText(),
+                        addLastName.getText(),
+                        addAddress.getText()));
                 
                 addFirstName.clear();
                 addLastName.clear();
-                addEmail.clear();
+                addAddress.clear();
             }
         });
 
        
         
-        hb.getChildren().addAll(addFirstName, addLastName, addEmail, addButton);
+        hb.getChildren().addAll(addFirstName, addLastName, addAddress, searchButton);
         hb.setSpacing(3);
 
         final VBox vbox = new VBox();
